@@ -1,0 +1,14 @@
+﻿  example.cpp
+  main.cpp
+C:\Dev\SAE\T3\GAD173-BreakoutGame\projects\base\example.cpp(46,51): warning C4244: 'argument': conversion from 'size_t' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Dev\SAE\T3\GAD173-BreakoutGame\projects\base\example.cpp(53,66): warning C4244: 'argument': conversion from 'size_t' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Dev\SAE\T3\GAD173-BreakoutGame\projects\base\example.cpp(60,28): warning C4100: 'deltaT': unreferenced formal parameter
+  base.vcxproj -> C:\Dev\SAE\T3\GAD173-BreakoutGame\bin\base_d.exe
