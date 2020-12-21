@@ -7,14 +7,14 @@
 //of the grid if needed.
 #define LINE_THICKNESS 3
 
-#define GRID_OFFSET_X 300
-#define GRID_OFFSET_Y 50
+#define GRID_OFFSET_X 0
+#define GRID_OFFSET_Y 0
 
-#define CELL_WIDTH 80
-#define CELL_HEIGHT 35
+#define CELL_WIDTH 110
+#define CELL_HEIGHT 50
 
 #define TOTAL_CELLS_X 15 + 1
-#define	TOTAL_CELLS_Y 25 + 1
+#define	TOTAL_CELLS_Y 15 + 1
 
 #define TILES_ARRAY_SIZE (TOTAL_CELLS_X - 1) * (TOTAL_CELLS_Y - 1)
 

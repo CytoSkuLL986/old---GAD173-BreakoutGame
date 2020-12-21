@@ -69,7 +69,7 @@ void Example::update(float deltaT)
 		int x = mouseposition.x / CELL_WIDTH;
 		int y = mouseposition.y / CELL_HEIGHT;
 
-		if (x >= 4 && y >= 1 &&
+		if (x >= 0 && y >= 0 &&
 			x < (TOTAL_CELLS_X - 1) && y < (TOTAL_CELLS_Y - 1))
 		{
 			int i = x + y * (TOTAL_CELLS_X - 1);
