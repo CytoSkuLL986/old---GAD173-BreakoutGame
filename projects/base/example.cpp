@@ -14,18 +14,18 @@ Example &Example::inst()
 	return s_instance;
 }
 
+//Below, associated the .png textures to the pointers made for the tiles.
 bool Example::start()
 {
 	m_backgroundSprite = kage::TextureManager::getSprite("data/sky.jpg");
-	cat = kage::TextureManager::getTexture("data/cat.png");
+	sapphire = kage::TextureManager::getTexture("data/sapphire.png");
+	diamond = kage::TextureManager::getTexture("data/diamond.png");
+	stone = kage::TextureManager::getTexture("data/stone.png");
+	questionMark = kage::TextureManager::getTexture("data/questionMark.png");
 
 	sf::Vector2u resolution = m_backgroundSprite->getTexture()->getSize();
 	m_backgroundSprite->setScale(float(m_window.getSize().x) / resolution.x, float(m_window.getSize().y) / resolution.y);
 	
-	//The below commented-out code is the first trial of sf::RectangleShape.
-	//line = sf::RectangleShape(sf::Vector2f(150.0f, 50.0f));
-	//line.setFillColor(sf::Color::Magenta);
-	//line.setPosition(sf::Vector2f(800.f,400.f));
 
 	/*
 	Below, you see the creation of the grid (more specifically, the grid lines); The first for loop is for the creation
@@ -62,25 +62,45 @@ void Example::update(float deltaT)
 {
 	sf::Vector2i mouseposition = sf::Mouse::getPosition(m_window);
 
-	//std::cout << mouseposition.x << " " << mouseposition.y << std::endl;
-
+	//Defining what can happen by clicking left mouse button
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 	{
 		int x = mouseposition.x / CELL_WIDTH;
 		int y = mouseposition.y / CELL_HEIGHT;
 
+		//setting restrictions as to where tiles can be placed
 		if (x >= 0 && y >= 0 &&
 			x < (TOTAL_CELLS_X - 1) && y < (TOTAL_CELLS_Y - 1))
 		{
 			int i = x + y * (TOTAL_CELLS_X - 1);
 
-				// Mustafa deleted this 1:20:24 std::cout << x << "  " << y << std::endl;
+			sf::Sprite sprite;
 
-				sf::Sprite catSprite;
-				catSprite.setTexture(*cat);
-				catSprite.setPosition(sf::Vector2f(x * CELL_WIDTH, y * CELL_HEIGHT));
+			//switch statement for associating tile textues with different tileIDs, and switching between them.
+			switch (TileID)
+			{
+			case 0:
+				break;
+			case 1:
+				sprite.setTexture(*sapphire);
+				break;
+			case 2:
+				sprite.setTexture(*diamond);
+				break;
+			case 3:
+				sprite.setTexture(*stone);
+				break;
 
-				tiles[i] = catSprite;
+			default:
+				sprite.setTexture(*questionMark);
+				break;
+			}
+
+				
+				
+				sprite.setPosition(sf::Vector2f(x * CELL_WIDTH, y * CELL_HEIGHT));
+
+				tiles[i] = sprite;
 		
 		} 
 	}
@@ -89,19 +109,41 @@ void Example::update(float deltaT)
 	{
 		m_running = false;
 	}
-
+	
+	//Made buttons for tiles:
 	ImGui::Begin("Kage2D");
 	if(ImGui::Button("Exit"))
 	{ 
 		m_running = false;
 	}
+
+	if (ImGui::Button("Sapphire"))
+	{
+		TileID = 1;
+	}
+
+	if (ImGui::Button("Diamond"))
+	{
+		TileID = 2;
+	}
+
+	if (ImGui::Button("Stone"))
+	{
+		TileID = 3;
+	}
+
+	if (ImGui::Button("Empty"))
+	{
+		TileID = 0;
+	}
+
 	ImGui::End();
 }
 
 void Example::render()
 {
 	m_window.draw(*m_backgroundSprite);
-	//m_window.draw(line);
+	
 
 	/*
 	Below are for loops created to draw/render the gridlines on the actual game window, one for the vertical, and the

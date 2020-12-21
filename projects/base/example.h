@@ -7,6 +7,8 @@
 //of the grid if needed.
 #define LINE_THICKNESS 3
 
+//As of now, Offsets are set 0, as they where creating unnecessary complications for during debugging.
+//I have kept the defines for future testing.
 #define GRID_OFFSET_X 0
 #define GRID_OFFSET_Y 0
 
@@ -29,13 +31,19 @@ public:
 	virtual void cleanup();
 	static Example &inst();
 
-	sf::Texture* cat;
+	int TileID = 0;
+
+	//pointers for tile textures
+	sf::Texture* sapphire = nullptr;
+	sf::Texture* diamond = nullptr;
+	sf::Texture* stone = nullptr;
+	sf::Texture* questionMark = nullptr;
 
 	//Below we have created the array of sprites (for grid-slots)
 	sf::Sprite tiles[TILES_ARRAY_SIZE];
 
-	sf::Sprite *m_backgroundSprite;
-	//sf::RectangleShape line;
+	sf::Sprite *m_backgroundSprite = nullptr;
+	
 
 	//Below arrays were created for the horizontal and vertical grid lines respectively. The definitions mentioned
 	//at the top of this script were used to set the array sizes.
