@@ -1,6 +1,7 @@
 #pragma once
 
 #include "app.h"
+#include "Tile.h"
 #include <vector>
 
 //Definitions for some grid parameters. Utilizing definitions this way allows us to easily modify the the dimensions
@@ -31,6 +32,9 @@ public:
 	virtual void cleanup();
 	static Example &inst();
 
+	void Save();
+	void Loading();
+
 	int TileID = 0;
 
 	//pointers for tile textures
@@ -39,8 +43,8 @@ public:
 	sf::Texture* stone = nullptr;
 	sf::Texture* questionMark = nullptr;
 
-	//Below we have created the array of sprites (for grid-slots)
-	sf::Sprite tiles[TILES_ARRAY_SIZE];
+	//Below we have created the array of tiles (for grid-slots)
+	Tile tiles[TILES_ARRAY_SIZE];
 
 	sf::Sprite *m_backgroundSprite = nullptr;
 	

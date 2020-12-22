@@ -1,4 +1,5 @@
 #include "example.h"
+#include <fstream>
 
 Example::Example(): App()
 {
@@ -95,13 +96,11 @@ void Example::update(float deltaT)
 				sprite.setTexture(*questionMark);
 				break;
 			}
-
-				
 				
 				sprite.setPosition(sf::Vector2f(x * CELL_WIDTH, y * CELL_HEIGHT));
 
-				tiles[i] = sprite;
-		
+				tiles[i].sprite = sprite;
+				tiles[i].id = TileID;
 		} 
 	}
 
@@ -137,7 +136,48 @@ void Example::update(float deltaT)
 		TileID = 0;
 	}
 
+	if (ImGui::Button("Save"))
+	{
+		Save();
+	}
+	if (ImGui::Button("Load"))
+	{
+		Loading();
+	}
+
 	ImGui::End();
+}
+
+void Example::Save()
+{
+	//std::cout << "Saved!" << std::endl;
+	std::ofstream myfile;
+	myfile.open("map.data");
+
+	for (size_t i = 0; i < TILES_ARRAY_SIZE; i++)
+	{
+		myfile << tiles[i].id << ", " ;
+	}
+
+	
+	myfile.close();
+}
+
+void Example::Loading()
+{
+	/*std::string line;
+	std::ifstream myfile("map.data");
+	if (myfile.is_open())
+	{
+		while (getline(myfile, line))
+		{
+			std::cout << line << '\n';
+		}
+		myfile.close();
+	}
+
+	else 
+		std::cout << "Unable to open file";*/
 }
 
 void Example::render()
@@ -164,7 +204,7 @@ void Example::render()
 
 	for (size_t i = 0; i < TILES_ARRAY_SIZE; i++)
 	{
-		m_window.draw(tiles[i]);
+		m_window.draw(tiles[i].sprite);
 	}
 }
 
